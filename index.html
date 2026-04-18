@@ -2678,6 +2678,25 @@
     schemaEl.textContent = JSON.stringify({'@context':'https://schema.org','@type':'Article','headline':article.title,'datePublished':'2026-04-01','author':{'@type':'Organization','name':'aistro.online'}});
 
     document.getElementById('article-back-btn').addEventListener('click', () => { location.hash = '#/blog'; });
+
+    // Inject affiliate block after first h2
+    const articleBody = document.querySelector('.article-body');
+    if (articleBody) {
+      const firstH2 = articleBody.querySelector('h2');
+      if (firstH2) {
+        const aff = getAffiliateForArticle(slug);
+        const block = document.createElement('div');
+        block.className = 'affiliate-block';
+        block.innerHTML = `
+        <div class="aff-text">
+          <strong>${escapeHTML(aff.name)}</strong>
+          <span>${escapeHTML(aff.desc)}</span>
+        </div>
+        <span class="aff-badge">Sponsored</span>
+        <a class="affiliate-cta" href="${escapeHTML(aff.url)}" target="_blank" rel="noopener sponsored">Try free ↗</a>`;
+        firstH2.parentNode.insertBefore(block, firstH2.nextSibling);
+      }
+    }
     blogEl.querySelectorAll('.blog-card').forEach(card => {
       card.addEventListener('click', () => { location.hash = '#/blog/' + card.dataset.slug; });
     });
@@ -3087,27 +3106,7 @@
     return AFFILIATE_BLOCKS.elevenlabs; // default
   }
 
-  // Patch renderArticle to inject affiliate block
-  const _renderArticleOrig = renderArticle;
-  function renderArticle(slug) {
-    _renderArticleOrig(slug);
-    // Inject affiliate block after first h2
-    const articleBody = document.querySelector('.article-body');
-    if (!articleBody) return;
-    const firstH2 = articleBody.querySelector('h2');
-    if (!firstH2) return;
-    const aff = getAffiliateForArticle(slug);
-    const block = document.createElement('div');
-    block.className = 'affiliate-block';
-    block.innerHTML = `
-    <div class="aff-text">
-      <strong>${escapeHTML(aff.name)}</strong>
-      <span>${escapeHTML(aff.desc)}</span>
-    </div>
-    <span class="aff-badge">Sponsored</span>
-    <a class="affiliate-cta" href="${escapeHTML(aff.url)}" target="_blank" rel="noopener sponsored">Try free ↗</a>`;
-    firstH2.parentNode.insertBefore(block, firstH2.nextSibling);
-  }
+  // Affiliate injection called at end of renderArticle directly
 
   // Nav buttons
   document.getElementById('digest-nav-btn').addEventListener('click', () => { location.hash = '#/digest'; });

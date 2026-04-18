@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(awk *)",
+      "Bash(grep -o '\"midjourney-vs-stable-diffusion\":[^,{]*' /Users/vitalybobryk/Documents/GitHub/aistro/index.html)"
+    ]
+  }
+}
