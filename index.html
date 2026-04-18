@@ -2666,7 +2666,11 @@ function renderArticle(slug) {
         </div>` : ''}
     </div>`;
 
-  document.title = article.title + ' — aistro.online';
+  updateMeta(
+    article.title + ' — aistro.online',
+    article.title + '. In-depth guide and comparison for 2026.',
+    'https://aistro.online/blog/' + article.slug
+  );
   window.scrollTo(0,0);
 
   let schemaEl = document.getElementById('article-schema');
@@ -2739,7 +2743,7 @@ function renderHub(slug) {
         </div>` : ''}
     </div>`;
 
-  document.title = hub.title + ' — aistro.online';
+  updateMeta(hub.title + ' — aistro.online', hub.desc, 'https://aistro.online/hub/' + hub.slug);
   window.scrollTo(0,0);
   document.getElementById('hub-back-btn').addEventListener('click', () => { location.hash = '#/hub'; });
 
@@ -2753,8 +2757,43 @@ function renderHub(slug) {
 // ═══════════════════════════════════════════════════
 // MODULE 16: ROUTER
 // ═══════════════════════════════════════════════════
+
+// ═══════════════════════════════════════════════════
+// SEO: Dynamic meta + pushState URLs
+// ═══════════════════════════════════════════════════
+function updateMeta(title, description, canonical) {
+  document.title = title;
+
+  // description
+  let dm = document.querySelector('meta[name="description"]');
+  if (dm) dm.setAttribute('content', description);
+
+  // og:title
+  let ogt = document.querySelector('meta[property="og:title"]');
+  if (ogt) ogt.setAttribute('content', title);
+
+  // og:description
+  let ogd = document.querySelector('meta[property="og:description"]');
+  if (ogd) ogd.setAttribute('content', description);
+
+  // og:url + canonical
+  let ogu = document.querySelector('meta[property="og:url"]');
+  if (ogu) ogu.setAttribute('content', canonical);
+  let can = document.querySelector('link[rel="canonical"]');
+  if (can) can.setAttribute('href', canonical);
+
+  // pushState so Google sees real URLs (not hashes)
+  try {
+    const path = canonical.replace('https://aistro.online', '') || '/';
+    if (window.location.pathname !== path) {
+      history.replaceState(null, title, path);
+    }
+  } catch(e) {}
+}
+
 function routeHandler() {
-  const h = location.hash.replace(/^#/,'');
+  // Support both hash-based (#/blog/slug) and path-based (/blog/slug) URLs
+  const h = location.hash.replace(/^#/,'') || location.pathname.replace(/^\//, '');
 
   if (h === '/digest') {
     document.body.className = 'digest-open';
@@ -2770,7 +2809,7 @@ function routeHandler() {
   if (h === '/blog') {
     document.body.className = 'blog-open';
     renderBlogIndex();
-    document.title = 'Blog & Guides — aistro.online';
+    updateMeta('Blog & Guides — aistro.online', 'In-depth AI tool comparisons and guides for 2026.', 'https://aistro.online/blog');
     return;
   }
   const blogFilterMatch  = h.match(/^\/blog\/filter\/(.+)$/);
@@ -2789,7 +2828,7 @@ function routeHandler() {
   if (h === '/hub') {
     document.body.className = 'hub-open';
     renderHubIndex();
-    document.title = 'AI by Category — aistro.online';
+    updateMeta('AI by Category — aistro.online', 'Explore the best AI tools by category: developers, image, audio, marketing and more.', 'https://aistro.online/hub');
     return;
   }
   const hubMatch = h.match(/^\/hub\/(.+)$/);
@@ -2801,20 +2840,30 @@ function routeHandler() {
 
   const toolMatch = h.match(/^\/tool\/(.+)$/);
   if (toolMatch && TOOL_BY_SLUG[decodeURIComponent(toolMatch[1])]) {
+    const t = TOOL_BY_SLUG[decodeURIComponent(toolMatch[1])];
     document.body.className = 'detail-open';
-    renderDetail(TOOL_BY_SLUG[decodeURIComponent(toolMatch[1])]);
+    renderDetail(t);
     window.scrollTo(0,0);
-    document.title = TOOL_BY_SLUG[decodeURIComponent(toolMatch[1])].name + ' — aistro.online';
+    updateMeta(
+      t.name + ' — aistro.online',
+      t.description,
+      'https://aistro.online/tool/' + t.slug
+    );
     return;
   }
 
   document.body.className = '';
-  document.title = 'aistro.online — Find the Right AI Tool';
+  updateMeta(
+    'aistro.online — Find the Right AI Tool',
+    'Find the best AI tool for your needs. 390+ tools ranked and reviewed — chatbots, image generators, coding assistants, voice AI and more.',
+    'https://aistro.online/'
+  );
   const s = sessionStorage.getItem('catalogScroll');
   if (s) requestAnimationFrame(() => window.scrollTo(0, parseInt(s)||0));
 }
 
 window.addEventListener('hashchange', routeHandler);
+window.addEventListener('popstate', routeHandler);
 
 // ═══════════════════════════════════════════════════
 // MODULE 17: NAV BUTTONS
@@ -2923,7 +2972,7 @@ function renderDigest() {
       </div>
     </div>`;
 
-  document.title = 'AI News Digest — aistro.online';
+  updateMeta('AI News Digest — aistro.online', 'Latest AI tool releases, updates, and funding rounds. Curated weekly.', 'https://aistro.online/digest');
   window.scrollTo(0,0);
   document.getElementById('digest-home-btn').addEventListener('click', () => { location.hash = ''; });
   document.getElementById('digest-subscribe-btn').addEventListener('click', async () => {
@@ -3022,7 +3071,7 @@ function renderAdvertise() {
       </div>
     </div>`;
 
-  document.title = 'Advertise — aistro.online';
+  updateMeta('Advertise on aistro.online — Reach AI Buyers & Builders', 'Reach developers, founders and creators actively searching for AI tools. Sponsored listings and article sponsorships available.', 'https://aistro.online/advertise');
   window.scrollTo(0,0);
   document.getElementById('adv-home-btn').addEventListener('click', () => { location.hash = ''; });
 }
