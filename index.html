@@ -2057,6 +2057,12 @@
 
 
 <script>
+  // GitHub Pages SPA: restore URL after 404.html redirect
+  (function() {
+    var r = sessionStorage.getItem('spaRedirect');
+    if (r) { sessionStorage.removeItem('spaRedirect'); history.replaceState(null, null, r); }
+  })();
+
   // ═══════════════════════════════════════════════════
   // MODULE 1: DATA
   // ═══════════════════════════════════════════════════
@@ -2529,9 +2535,10 @@
   // ═══════════════════════════════════════════════════
   function navigateToTool(slug) {
     sessionStorage.setItem('catalogScroll', String(window.scrollY));
-    location.hash = '#/tool/' + encodeURIComponent(slug);
+    history.pushState(null, '', '/tool/' + encodeURIComponent(slug));
+    routeHandler();
   }
-  function navigateHome() { location.hash = ''; }
+  function navigateHome() { history.pushState(null, '', '/'); routeHandler(); }
 
   function renderDetail(tool) {
     const detail     = document.getElementById('detail');
@@ -2624,7 +2631,7 @@
       </div>
     </div>`;
 
-    document.getElementById('blog-home-btn').addEventListener('click', () => { location.hash = ''; });
+    document.getElementById('blog-home-btn').addEventListener('click', () => { history.pushState(null,'','/'); routeHandler(); });
 
     const bsi = document.getElementById('blog-search-input');
     if (bsi) {
@@ -2633,13 +2640,13 @@
     }
 
     blogEl.querySelectorAll('.blog-card').forEach(card => {
-      card.addEventListener('click', () => { location.hash = '#/blog/' + card.dataset.slug; });
-      card.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') { e.preventDefault(); location.hash = '#/blog/'+card.dataset.slug; } });
+      card.addEventListener('click', () => { history.pushState(null,'','/blog/'+card.dataset.slug); routeHandler(); });
+      card.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') { e.preventDefault(); history.pushState(null,'','/blog/'+card.dataset.slug); routeHandler(); } });
     });
     blogEl.querySelectorAll('[data-blog-filter]').forEach(btn => {
       btn.addEventListener('click', () => {
         const f = btn.dataset.blogFilter;
-        location.hash = f ? '#/blog/filter/'+f : '#/blog';
+        history.pushState(null,'', f ? '/blog/filter/'+f : '/blog'); routeHandler();
       });
     });
   }
@@ -2684,7 +2691,7 @@
     if (!schemaEl) { schemaEl = document.createElement('script'); schemaEl.id='article-schema'; schemaEl.type='application/ld+json'; document.head.appendChild(schemaEl); }
     schemaEl.textContent = JSON.stringify({'@context':'https://schema.org','@type':'Article','headline':article.title,'datePublished':'2026-04-01','author':{'@type':'Organization','name':'aistro.online'}});
 
-    document.getElementById('article-back-btn').addEventListener('click', () => { location.hash = '#/blog'; });
+    document.getElementById('article-back-btn').addEventListener('click', () => { history.pushState(null,'','/blog'); routeHandler(); });
 
     // Inject affiliate block after first h2
     const articleBody = document.querySelector('.article-body');
@@ -2705,7 +2712,7 @@
       }
     }
     blogEl.querySelectorAll('.blog-card').forEach(card => {
-      card.addEventListener('click', () => { location.hash = '#/blog/' + card.dataset.slug; });
+      card.addEventListener('click', () => { history.pushState(null,'','/blog/'+card.dataset.slug); routeHandler(); });
     });
   }
 
@@ -2731,10 +2738,10 @@
           </div>`).join('')}
       </div>
     </div>`;
-    document.getElementById('hub-home-btn').addEventListener('click', () => { location.hash = ''; });
+    document.getElementById('hub-home-btn').addEventListener('click', () => { history.pushState(null,'','/'); routeHandler(); });
     hubEl.querySelectorAll('[data-hub]').forEach(card => {
-      card.addEventListener('click', () => { location.hash = '#/hub/' + card.dataset.hub; });
-      card.addEventListener('keydown', e => { if (e.key==='Enter') location.hash = '#/hub/'+card.dataset.hub; });
+      card.addEventListener('click', () => { history.pushState(null,'','/hub/'+card.dataset.hub); routeHandler(); });
+      card.addEventListener('keydown', e => { if (e.key==='Enter') { history.pushState(null,'','/hub/'+card.dataset.hub); routeHandler(); } });
     });
   }
 
@@ -2771,12 +2778,12 @@
 
     updateMeta(hub.title + ' — aistro.online', hub.desc, 'https://aistro.online/hub/' + hub.slug);
     window.scrollTo(0,0);
-    document.getElementById('hub-back-btn').addEventListener('click', () => { location.hash = '#/hub'; });
+    document.getElementById('hub-back-btn').addEventListener('click', () => { history.pushState(null,'','/hub'); routeHandler(); });
 
     const grid = document.getElementById('hub-tool-grid');
     catTools.forEach(t => { const c = makeCard(t); c.classList.add('in'); grid.appendChild(c); });
     hubEl.querySelectorAll('.blog-card').forEach(card => {
-      card.addEventListener('click', () => { location.hash = '#/blog/' + card.dataset.slug; });
+      card.addEventListener('click', () => { history.pushState(null,'','/blog/'+card.dataset.slug); routeHandler(); });
     });
   }
 
@@ -2813,7 +2820,7 @@
   }
 
   function routeHandler() {
-    const h = location.hash.replace(/^#/,'');
+    const h = location.pathname;
 
     if (h === '/digest') {
       document.body.className = 'digest-open';
@@ -2876,13 +2883,12 @@
     if (s) requestAnimationFrame(() => window.scrollTo(0, parseInt(s)||0));
   }
 
-  window.addEventListener('hashchange', routeHandler);
   window.addEventListener('popstate', routeHandler);
 
   // ═══════════════════════════════════════════════════
   // MODULE 17: NAV BUTTONS
   // ═══════════════════════════════════════════════════
-  document.getElementById('blog-nav-btn').addEventListener('click', () => { location.hash = '#/blog'; });
+  document.getElementById('blog-nav-btn').addEventListener('click', () => { history.pushState(null,'','/blog'); routeHandler(); });
 
   // ═══════════════════════════════════════════════════
   // MODULE 18: NEWSLETTER + SUBMIT
@@ -2986,7 +2992,7 @@
 
     updateMeta('AI News Digest — aistro.online', 'Latest AI tool releases, updates, and funding rounds. Curated weekly.', 'https://aistro.online/digest');
     window.scrollTo(0,0);
-    document.getElementById('digest-home-btn').addEventListener('click', () => { location.hash = ''; });
+    document.getElementById('digest-home-btn').addEventListener('click', () => { history.pushState(null,'','/'); routeHandler(); });
     document.getElementById('digest-subscribe-btn').addEventListener('click', async () => {
       const email = document.getElementById('digest-email').value.trim();
       const btn   = document.getElementById('digest-subscribe-btn');
@@ -3085,7 +3091,7 @@
 
     updateMeta('Advertise on aistro.online — Reach AI Buyers & Builders', 'Reach developers, founders and creators actively searching for AI tools. Sponsored listings and article sponsorships available.', 'https://aistro.online/advertise');
     window.scrollTo(0,0);
-    document.getElementById('adv-home-btn').addEventListener('click', () => { location.hash = ''; });
+    document.getElementById('adv-home-btn').addEventListener('click', () => { history.pushState(null,'','/'); routeHandler(); });
   }
 
   // ═══════════════════════════════════════════════════
@@ -3108,7 +3114,7 @@
   // Affiliate injection called at end of renderArticle directly
 
   // Nav buttons
-  document.getElementById('digest-nav-btn').addEventListener('click', () => { location.hash = '#/digest'; });
+  document.getElementById('digest-nav-btn').addEventListener('click', () => { history.pushState(null,'','/digest'); routeHandler(); });
 
 
 
