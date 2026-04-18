@@ -104,8 +104,6 @@
       font-size: 15px;
       line-height: 1.6;
     }
-
-    body.detail-open #catalog { display: none; }
     body:not(.detail-open) #detail { display: none; }
 
     /* ──── MESH BACKGROUND ──── */
@@ -949,9 +947,8 @@
 
     /* ──── BLOG ──── */
     #blog { display: none; }
-    body.blog-open #catalog { display: none; }
-    body.blog-open #detail  { display: none; }
-    body.blog-open #blog    { display: block; }
+
+
 
     .blog-index {
       max-width: 1280px;
@@ -1613,11 +1610,10 @@
 
     /* ──── DIGEST ──── */
     #digest { display: none; }
-    body.digest-open #catalog { display: none; }
-    body.digest-open #detail  { display: none; }
-    body.digest-open #blog    { display: none; }
-    body.digest-open #hub     { display: none; }
-    body.digest-open #digest  { display: block; }
+
+
+
+
 
     .digest-wrap {
       max-width: 860px;
@@ -1708,12 +1704,11 @@
 
     /* ──── ADVERTISE ──── */
     #advertise { display: none; }
-    body.advertise-open #catalog { display: none; }
-    body.advertise-open #detail  { display: none; }
-    body.advertise-open #blog    { display: none; }
-    body.advertise-open #hub     { display: none; }
-    body.advertise-open #digest  { display: none; }
-    body.advertise-open #advertise { display: block; }
+
+
+
+
+
 
     .adv-wrap {
       max-width: 900px;
@@ -1856,6 +1851,28 @@
       flex-shrink: 0;
     }
 
+
+    /* ──── PAGE VISIBILITY ──── */
+    body.detail-open    #catalog, body.detail-open    #blog,
+    body.detail-open    #hub,     body.detail-open    #digest,
+    body.detail-open    #advertise { display: none; }
+
+    body.blog-open      #catalog,  body.blog-open     #detail,
+    body.blog-open      #hub,      body.blog-open     #digest,
+    body.blog-open      #advertise { display: none; }
+
+    body.hub-open       #catalog,  body.hub-open      #detail,
+    body.hub-open       #blog,     body.hub-open      #digest,
+    body.hub-open       #advertise { display: none; }
+
+    body.digest-open    #catalog,  body.digest-open   #detail,
+    body.digest-open    #blog,     body.digest-open   #hub,
+    body.digest-open    #advertise { display: none; }
+
+    body.advertise-open #catalog,  body.advertise-open #detail,
+    body.advertise-open #blog,     body.advertise-open #hub,
+    body.advertise-open #digest   { display: none; }
+
   </style>
 </head>
 <body>
@@ -1882,7 +1899,6 @@
     <div id="compare-table"></div>
   </div>
 </div>
-
 <div id="catalog">
 
   <header class="hero">
@@ -1916,20 +1932,11 @@
     </div>
   </header>
 
-
   <div class="blog-nav-btn-wrap" style="position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:10px 48px 0;display:flex;justify-content:flex-end;align-items:center;gap:8px;">
-    <button class="chip" id="advertise-nav-btn" style="gap:8px;">
-      <span style="font-family:'Syne',sans-serif;font-size:12px;">◈</span> Advertise
-    </button>
-    <button class="chip" id="hub-nav-btn" style="gap:8px;">
-      <span style="font-family:'Syne',sans-serif;font-size:12px;">◈</span> Hubs
-    </button>
-    <button class="chip" id="digest-nav-btn" style="gap:8px;">
-      <span style="font-family:'Syne',sans-serif;font-size:12px;">📰</span> News
-    </button>
-    <button class="chip" id="blog-nav-btn" style="gap:8px;">
-      <span style="font-family:'Syne',sans-serif;font-size:12px;">✦</span> Blog &amp; Guides
-    </button>
+    <button class="chip" id="digest-nav-btn" style="gap:8px;">📰 News</button>
+    <button class="chip" id="blog-nav-btn" style="gap:8px;">✦ Blog &amp; Guides</button>
+    <button class="chip" id="hub-nav-btn" style="gap:8px;">◈ Hubs</button>
+    <button class="chip" id="advertise-nav-btn" style="gap:8px;">◈ Advertise</button>
     <a class="kofi-btn" href="https://ko-fi.com/animegames" target="_blank" rel="noopener" style="font-size:12px;height:32px;padding:0 12px;text-decoration:none;">☕ Support</a>
   </div>
   <div class="controls-wrap">
