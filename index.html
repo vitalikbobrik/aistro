@@ -946,10 +946,6 @@
     }
 
     /* ──── BLOG ──── */
-    #blog { display: none; }
-
-
-
     .blog-index {
       max-width: 1280px;
       margin: 0 auto;
@@ -1853,25 +1849,32 @@
 
 
     /* ──── PAGE VISIBILITY ──── */
+    #blog, #hub, #digest, #advertise { display: none; }
+
     body.detail-open    #catalog, body.detail-open    #blog,
     body.detail-open    #hub,     body.detail-open    #digest,
     body.detail-open    #advertise { display: none; }
+    body.detail-open    #detail   { display: block; }
 
     body.blog-open      #catalog,  body.blog-open     #detail,
     body.blog-open      #hub,      body.blog-open     #digest,
     body.blog-open      #advertise { display: none; }
+    body.blog-open      #blog      { display: block; }
 
     body.hub-open       #catalog,  body.hub-open      #detail,
     body.hub-open       #blog,     body.hub-open      #digest,
     body.hub-open       #advertise { display: none; }
+    body.hub-open       #hub       { display: block; }
 
     body.digest-open    #catalog,  body.digest-open   #detail,
     body.digest-open    #blog,     body.digest-open   #hub,
     body.digest-open    #advertise { display: none; }
+    body.digest-open    #digest    { display: block; }
 
     body.advertise-open #catalog,  body.advertise-open #detail,
     body.advertise-open #blog,     body.advertise-open #hub,
     body.advertise-open #digest   { display: none; }
+    body.advertise-open #advertise { display: block; }
 
   </style>
 </head>
