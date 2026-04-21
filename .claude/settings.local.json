@@ -8,7 +8,10 @@
       "Bash(git *)",
       "Bash(gh api *)",
       "Bash(GIT_CONFIG_NOSYSTEM=1 HOME=/tmp git *)",
-      "Bash(GIT_CONFIG_NOSYSTEM=1 git -c gpg.format=openpgp log --oneline -20)"
+      "Bash(GIT_CONFIG_NOSYSTEM=1 git -c gpg.format=openpgp log --oneline -20)",
+      "Bash(grep -E \"\\\\.\\(js|ts|md|txt\\)$\")",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:aistro.online)"
     ]
   }
 }
