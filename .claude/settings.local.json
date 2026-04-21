@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(awk *)",
-      "Bash(grep -o '\"midjourney-vs-stable-diffusion\":[^,{]*' /Users/vitalybobryk/Documents/GitHub/aistro/index.html)"
+      "Bash(grep -o '\"midjourney-vs-stable-diffusion\":[^,{]*' /Users/vitalybobryk/Documents/GitHub/aistro/index.html)",
+      "WebFetch(domain:learnwithhasan.com)",
+      "Bash(python3 *)"
     ]
   }
 }

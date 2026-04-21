@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code Guide — Complete Setup & Tips 2026 — aistro.online</title>
+<meta name="description" content="Complete Claude Code guide for 2026. Setup, keyboard shortcuts, CLAUDE.md, hooks, MCP servers, free usage via OpenRouter, and power prompts.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://aistro.online/blog/claude-code-guide">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Claude Code Guide — Complete Setup & Tips 2026">
+<meta property="og:description" content="Complete Claude Code guide for 2026. Setup, keyboard shortcuts, CLAUDE.md, hooks, MCP servers, free usage via OpenRouter, and power prompts.">
+<meta property="og:url" content="https://aistro.online/blog/claude-code-guide">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Claude Code Guide — Complete Setup & Tips 2026">
+<meta name="twitter:description" content="Complete Claude Code guide for 2026. Setup, keyboard shortcuts, CLAUDE.md, hooks, MCP servers, free usage via OpenRouter, and power prompts.">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-8PK6QJ5V82"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-8PK6QJ5V82');</script>
+<!-- AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8821700334977821" crossorigin="anonymous"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Claude Code Guide — Complete Setup & Tips 2026",
+  "datePublished": "2026-04-21",
+  "dateModified": "2026-04-21",
+  "author": {"@type": "Organization", "name": "aistro.online"},
+  "publisher": {"@type": "Organization", "name": "aistro.online", "url": "https://aistro.online"}
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:#f8f8fc;color:#0a0a14;line-height:1.6;font-size:15px}
+.wrap{max-width:760px;margin:0 auto;padding:40px 24px 80px}
+nav{display:flex;align-items:center;gap:12px;margin-bottom:40px;padding-bottom:20px;border-bottom:1px solid rgba(0,0,0,0.08)}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:17px;text-decoration:none;color:#0a0a14}
+.logo span{color:#6c3fff}
+.back{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border:1.5px solid rgba(0,0,0,0.14);border-radius:8px;font-size:12px;color:#3a3a50;text-decoration:none;font-family:'DM Mono',monospace;letter-spacing:.05em;transition:all .15s}
+.back:hover{background:#0a0a14;color:#fff;border-color:#0a0a14}
+.badge{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:100px;margin-bottom:20px;display:inline-block}
+.badge.guide{background:rgba(0,205,184,.12);color:#00cdb8}
+h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);letter-spacing:-.025em;line-height:1.05;margin-bottom:24px}
+h2{font-family:'Syne',sans-serif;font-weight:700;font-size:22px;letter-spacing:-.01em;margin:40px 0 14px}
+h3{font-family:'Syne',sans-serif;font-weight:600;font-size:17px;margin:28px 0 10px}
+p{font-size:16px;line-height:1.75;color:#3a3a50;margin-bottom:16px}
+ul,ol{padding-left:20px;margin-bottom:16px}
+li{font-size:15px;line-height:1.7;color:#3a3a50;margin-bottom:6px}
+strong{color:#0a0a14;font-weight:600}
+a{color:#6c3fff;text-decoration:none}
+a:hover{text-decoration:underline}
+code{font-family:'DM Mono',monospace;font-size:13px;background:rgba(108,63,255,.08);color:#5a2fcc;padding:2px 7px;border-radius:5px}
+pre{background:#0a0a14;border-radius:10px;padding:20px 22px;margin:20px 0;overflow-x:auto}
+pre code{background:none;color:#c9d1d9;font-size:13px;padding:0;line-height:1.7}
+table{width:100%;border-collapse:collapse;margin:24px 0;font-size:14px;border:1px solid rgba(0,0,0,0.08);border-radius:8px;overflow:hidden}
+th{background:#f2f2f8;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#7a7a96;padding:10px 14px;text-align:left;border-bottom:1px solid rgba(0,0,0,0.1)}
+td{padding:10px 14px;border-bottom:1px solid rgba(0,0,0,0.06);color:#3a3a50}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#f8f8fc}
+.verdict-box{background:rgba(108,63,255,.08);border:1.5px solid rgba(108,63,255,.18);border-radius:10px;padding:16px 20px;margin:20px 0 28px;font-size:15px;line-height:1.6}
+.verdict-box strong{color:#6c3fff}
+.tip-box{background:rgba(0,205,184,.08);border:1.5px solid rgba(0,205,184,.2);border-radius:10px;padding:16px 20px;margin:20px 0 28px;font-size:15px;line-height:1.6}
+.tip-box strong{color:#00a896}
+.meta{font-family:'DM Mono',monospace;font-size:11px;color:#aaaac0;letter-spacing:.05em;margin-bottom:32px}
+footer{margin-top:60px;padding-top:24px;border-top:1px solid rgba(0,0,0,0.08);font-family:'DM Mono',monospace;font-size:11px;color:#aaaac0;letter-spacing:.06em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+footer a{color:#6c3fff}
+@media(prefers-color-scheme:dark){
+  body{background:#0d0d14;color:#f0f0fa}
+  nav{border-color:rgba(255,255,255,.08)}
+  .logo{color:#f0f0fa}
+  .back{color:#b0b0cc;border-color:rgba(255,255,255,.14)}
+  .back:hover{background:#f0f0fa;color:#0d0d14}
+  h1,h2,h3{color:#f0f0fa}
+  p,li,td{color:#b0b0cc}
+  strong{color:#f0f0fa}
+  code{background:rgba(108,63,255,.18);color:#a78bfa}
+  th{background:#1a1a26;color:#7070a0}
+  table{border-color:rgba(255,255,255,.08)}
+  td{border-color:rgba(255,255,255,.06)}
+  tr:hover td{background:#1a1a26}
+  .verdict-box{background:rgba(108,63,255,.18);border-color:rgba(108,63,255,.3)}
+  .tip-box{background:rgba(0,205,184,.1);border-color:rgba(0,205,184,.25)}
+  footer{border-color:rgba(255,255,255,.08);color:#505075}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="logo" href="/">ai<span>stro</span>.online</a>
+    <a class="back" href="/blog">← All guides</a>
+  </nav>
+  <div class="badge guide">Guide</div>
+  <div class="meta">April 2026 · aistro.online</div>
+  <article>
+
+<h1>Claude Code — Complete Guide 2026</h1>
+<p>Claude Code is Anthropic's official agentic CLI that brings Claude directly into your terminal. It reads and edits files, runs shell commands, manages git, and navigates entire codebases — all through natural language. This guide covers everything from first install to advanced power-user workflows.</p>
+
+<h2>What Is Claude Code?</h2>
+<p>Unlike a chat interface, Claude Code is an <strong>autonomous agent</strong> that operates inside your project directory. It can plan and execute multi-step tasks, spawn parallel sub-agents, hook into your git workflow, and remember project context across sessions — without you having to copy-paste code back and forth.</p>
+<div class="verdict-box"><strong>Key distinction:</strong> Claude Code doesn't just suggest code — it reads your files, makes the edits, runs the tests, and commits the changes. You stay in control via a tiered permission system.</div>
+
+<h2 id="free-setup">Installation & Free Setup</h2>
+<p>Claude Code requires a <strong>Claude Pro ($20/mo) or Max subscription</strong> by default. But you can route it through OpenRouter's free models to use it at no cost — great for experimentation.</p>
+
+<h3>Standard Install</h3>
+<ol>
+  <li>Install via npm: <code>npm install -g @anthropic-ai/claude-code</code></li>
+  <li>Run <code>claude</code> in your project directory</li>
+  <li>Sign in with your Anthropic account on first launch</li>
+</ol>
+
+<h3>Free Setup via OpenRouter</h3>
+<p>Create or edit <code>.claude/settings.local.json</code> in your project (gitignored by default):</p>
+<pre><code>{
+  "env": {
+    "ANTHROPIC_AUTH_TOKEN": "any-string-here",
+    "ANTHROPIC_BASE_URL": "https://openrouter.ai/api",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "minimax/minimax-m2.5:free"
+  }
+}</code></pre>
+<div class="tip-box"><strong>Note:</strong> Free models require more structured, explicit prompts. They work well for focused tasks but may struggle with large multi-file operations that Sonnet/Opus handle seamlessly.</div>
+
+<h2>Keyboard Shortcuts</h2>
+<table>
+  <thead><tr><th>Shortcut</th><th>Action</th></tr></thead>
+  <tbody>
+    <tr><td><code>Shift + Enter</code></td><td>New line without sending</td></tr>
+    <tr><td><code>Shift + Tab</code></td><td>Cycle permission modes</td></tr>
+    <tr><td><code>Ctrl + C</code></td><td>Cancel current operation</td></tr>
+    <tr><td><code>Cmd/Meta + T</code></td><td>Toggle Extended Thinking</td></tr>
+    <tr><td><code>Cmd/Meta + P</code></td><td>Open model picker</td></tr>
+  </tbody>
+</table>
+
+<h2>Permission System</h2>
+<p>Claude Code uses a tiered approach so you're never surprised by unexpected file changes:</p>
+<ul>
+  <li><strong>Read-only tools</strong> (file reads, grep, glob) — no approval needed</li>
+  <li><strong>File edits</strong> — approved per session</li>
+  <li><strong>Bash commands</strong> — approved per project</li>
+</ul>
+<p>Permission mode is set in <code>.claude/settings.json</code> (shared via git) or <code>~/.claude/settings.json</code> (personal). Modes: <code>default</code>, <code>plan</code> (read-only analysis), <code>auto</code> (AI decides), <code>acceptEdits</code> (auto-approve file edits).</p>
+
+<h2>Essential Slash Commands</h2>
+<table>
+  <thead><tr><th>Command</th><th>Purpose</th></tr></thead>
+  <tbody>
+    <tr><td><code>/init</code></td><td>Initialize project — creates CLAUDE.md</td></tr>
+    <tr><td><code>/compact</code></td><td>Compress conversation context</td></tr>
+    <tr><td><code>/clear</code></td><td>Wipe context and start fresh</td></tr>
+    <tr><td><code>/diff</code></td><td>Interactive diff viewer</td></tr>
+    <tr><td><code>/model</code></td><td>Switch between Opus / Sonnet</td></tr>
+    <tr><td><code>/plan</code></td><td>Plan before coding</td></tr>
+    <tr><td><code>/memory</code></td><td>Manage saved context</td></tr>
+  </tbody>
+</table>
+
+<h2>CLAUDE.md — Project Memory</h2>
+<p>Claude Code reads <code>CLAUDE.md</code> at the start of every session. Think of it as a permanent briefing document for the AI. Include:</p>
+<ul>
+  <li>Tech stack and versions</li>
+  <li>Build and test commands</li>
+  <li>Architecture overview</li>
+  <li>Code style rules</li>
+  <li>Any project-specific constraints</li>
+</ul>
+<p>Keep it <strong>under 200 lines</strong>. For larger projects, split rules into <code>.claude/rules/</code> files. Run <code>/init</code> to generate a starter version automatically.</p>
+
+<h2>Hooks — Automation at Every Step</h2>
+<p>Hooks let you run shell commands at specific lifecycle points. Configure them in <code>settings.json</code>:</p>
+<ul>
+  <li><strong>PreToolUse</strong> — runs before a tool call; exit code 2 blocks the action</li>
+  <li><strong>PostToolUse</strong> — runs after success (auto-format, lint, run tests)</li>
+  <li><strong>Notification</strong> — desktop alerts when Claude needs input</li>
+</ul>
+<p>Example: auto-run <code>prettier</code> after every file edit, or <code>eslint --fix</code> after JS changes.</p>
+
+<h2>MCP Servers</h2>
+<p>Model Context Protocol servers extend Claude Code with external integrations — browsers, databases, APIs, design tools. Add one with:</p>
+<pre><code>claude mcp add --transport stdio playwright -- npx @playwright/mcp@latest</code></pre>
+<p>Install plugins from the marketplace with <code>/plugin install</code>. Popular MCP servers: Playwright (browser automation), Figma, Postgres, filesystem extensions.</p>
+
+<h2>Model Selection</h2>
+<table>
+  <thead><tr><th>Model</th><th>Best for</th><th>Cost</th></tr></thead>
+  <tbody>
+    <tr><td>Opus 4.6</td><td>Complex, multi-step tasks</td><td>$$$</td></tr>
+    <tr><td>Sonnet 4.6</td><td>Daily coding (recommended default)</td><td>$$</td></tr>
+    <tr><td>MiniMax M2.7</td><td>Strong coding, budget-friendly</td><td>$</td></tr>
+    <tr><td>DeepSeek V3</td><td>Simple tasks, cheapest option</td><td>¢</td></tr>
+  </tbody>
+</table>
+<p>Use <code>/model</code> to switch mid-session. Non-Anthropic models require routing through CC Switch or OpenRouter as shown in the free setup above.</p>
+
+<h2>Recommended Workflow</h2>
+<p>The three pillars of effective Claude Code use:</p>
+<ol>
+  <li><strong>Modular structure</strong> — split files at ~300 lines so Claude has focused context</li>
+  <li><strong>One task per session</strong> — plan → code → test → commit → <code>/clear</code></li>
+  <li><strong>Understand before prompting</strong> — know the building blocks of what you're asking</li>
+</ol>
+
+<h2>Power Prompts</h2>
+<h3>Force planning before coding</h3>
+<p><em>"Analyze the structure, list every file you'll touch, explain the changes you plan to make, then wait for my approval before writing any code."</em></p>
+
+<h3>Root-cause debugging</h3>
+<p><em>"Find the root cause of this bug — don't just fix the symptom. Explain exactly what's wrong, fix it properly, then run the tests."</em></p>
+
+<h3>Parallel sub-agents</h3>
+<p><em>"Split this into 3 independent tasks and run them in parallel using sub-agents: [task A], [task B], [task C]."</em></p>
+
+<h3>Clarify before starting</h3>
+<p>End any complex prompt with: <em>"Ask me any clarifying questions before you start."</em> This prevents Claude from making wrong assumptions on large tasks.</p>
+
+<h2>IDE Integration</h2>
+<p>Claude Code integrates with VS Code, Cursor, JetBrains IDEs (IntelliJ, PyCharm, WebStorm), and any terminal. In VS Code, install the Claude Code extension for inline diffs and a dedicated panel. In Cursor, it works alongside Cursor's own AI features.</p>
+
+<h2>Custom Commands & Skills</h2>
+<p><strong>Skills</strong> (recommended): Markdown files at <code>.claude/skills/name/SKILL.md</code> with YAML frontmatter. They auto-trigger based on context and can bundle resources.</p>
+<p><strong>Legacy commands</strong>: Still supported at <code>.claude/commands/</code>. Use <code>$ARGUMENTS</code> to accept input when invoked via <code>/command-name</code>.</p>
+
+<h2>Frequently Asked Questions</h2>
+<h3>Does Claude Code require a paid subscription?</h3>
+<p>Yes — by default it requires Claude Pro ($20/mo) or Max. The free workaround via OpenRouter (described above) works well for lighter use.</p>
+
+<h3>What happens when context gets full?</h3>
+<p>Claude Code auto-compacts when the context window fills. You can also run <code>/compact</code> manually to summarize the conversation, or <code>/clear</code> to start fresh (losing history but freeing all context).</p>
+
+<h3>Can I use it without an internet connection?</h3>
+<p>No — Claude Code requires a connection to the model API. For local/offline use, consider routing to a local model via Ollama or LM Studio through the <code>ANTHROPIC_BASE_URL</code> override.</p>
+
+<h3>Is it safe to use on sensitive codebases?</h3>
+<p>The permission system gives you full control. Use <code>plan</code> mode for read-only analysis, review every bash command before approval, and keep secrets in gitignored <code>settings.local.json</code>.</p>
+
+<p>Browse all AI coding tools at <a href="/">aistro.online</a> · See also: <a href="/blog/best-ai-coding-assistants">Best AI Coding Assistants 2026</a> · <a href="/blog/cursor-vs-github-copilot">Cursor vs GitHub Copilot</a></p>
+
+  </article>
+  <footer>
+    <span>© 2026 aistro.online</span>
+    <span><a href="/">Browse 390+ AI tools</a> · <a href="/blog">More guides</a> · <a href="/advertise">Advertise</a></span>
+  </footer>
+</div>
+</body>
+</html>
